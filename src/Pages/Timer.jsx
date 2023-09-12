@@ -4,13 +4,13 @@ import { Container, ButtonContainer, CounterContainer } from './style'
 
 export default function Timer(){
 
-    var secondsAmmount = 20 * 60;
-    var secondsAmmountPause = 5*60;
+    var secondsAmmount = 2 * 5;
+    var secondsAmmountPause = 5 * 60;
 
-    const [secondsCount, setSecondsCount] = useState(secondsAmmount)
     const [pause, setPause] = useState(true)
-    const [start, setStart] = useState(false)
     const [selectValue, setSelectValue] = useState(0)
+    const [secondsCount, setSecondsCount] = useState(secondsAmmount)
+    const [message, setMessage] = useState('')
 
     let minutes = Math.floor(secondsCount/60)
     let seconds = secondsCount % 60;
@@ -26,7 +26,6 @@ export default function Timer(){
         {id: 4, name: '60 minutes'},
     ]
 
-
     useEffect(() => {
         if(pause == false)
         setTimeout(() => {
@@ -37,43 +36,72 @@ export default function Timer(){
                 setSecondsCount(state => state - 1)
             }, timePause)
         }
-        if(secondsCount == 0){
-            alert('O TEMPO ACABOU!')
+        if(secondsCount == -1){
+            setPause(true)
             setSecondsCount(secondsAmmountPause + 1)
+            setMessage('Time is over!')
+            setTimeout(() =>{
+            setMessage('')
+            }, 10000)
+        }
+    }, [secondsCount, pause])
+
+    useEffect(() => {
+        if(selectValue == 0){
+            setSecondsCount(1*4)
             setPause(true)
         }
-    }, [secondsCount, pause, selectValue])
-    
+        if(selectValue == 1){
+            setSecondsCount(30*60)
+            setPause(true)
+        }
+        if(selectValue == 2){
+            setSecondsCount(40*60)
+            setPause(true)
+        }
+        if(selectValue == 3){
+            setSecondsCount(50*60)
+            setPause(true)
+        }
+        if(selectValue == 4){
+            setSecondsCount(60*60)
+            setPause(true)
+        }
+    }, [selectValue])
+
+
     function toStart(){
         setPause(false)
-        
+
     }
     function toPause(){
         setPause(!pause)
         console.log(pause)
     }
-    
-    
+
+
     return(
         <>
             <Container>
-                
+            <span className='message'>{message}</span>
                 <select value={selectValue} onChange={e => setSelectValue(e.target.value, console.log(selectValue))}>
                     {list.map((item, id) => (
                         <option value={item.id} key={item.id}>{item.name}</option>
                     ))}
                 </select>
-
                 <CounterContainer>
+            
                 <span>{String(minutes).padStart(2, '0')}</span>
                 <span>:</span>
                 <span>{String(seconds).padStart(2, '0')}</span>
+                   
                 </CounterContainer>
-              
+
 
                 <ButtonContainer>
                 <button onClick={toStart}>Start</button>
                 <button onClick={toPause}>Pause</button>
+                <button>Reset</button>
                 </ButtonContainer>
             </Container>
         </>
