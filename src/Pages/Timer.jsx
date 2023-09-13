@@ -67,9 +67,27 @@ export default function Timer(){
             setSecondsCount(60*60)
             setPause(true)
         }
-    }, [selectValue])
+    }, [selectValue, setSecondsCount])
 
-
+    function toReset(){
+        setPause(true)
+        
+        if(selectValue == 0){
+            setSecondsCount(20*60)
+        }
+        if(selectValue == 1){
+            setSecondsCount(30*60)
+        }
+        if(selectValue == 2){
+            setSecondsCount(40*60)
+        }
+        if(selectValue == 3){
+            setSecondsCount(50*60)
+        }
+        if(selectValue == 4){
+            setSecondsCount(60*60)
+        }
+    }
     function toStart(){
         setPause(false)
 
@@ -101,7 +119,7 @@ export default function Timer(){
                 <ButtonContainer>
                 <button onClick={toStart}>Start</button>
                 <button onClick={toPause}>Pause</button>
-                <button>Reset</button>
+                <button onClick={toReset}>Reset</button>
                 </ButtonContainer>
             </Container>
         </>
