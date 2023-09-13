@@ -4,7 +4,7 @@ import { Container, ButtonContainer, CounterContainer } from './style'
 
 export default function Timer(){
 
-    var secondsAmmount = 2 * 5;
+    var secondsAmmount = 20 * 60;
     var secondsAmmountPause = 5 * 60;
 
     const [pause, setPause] = useState(true)
@@ -48,7 +48,7 @@ export default function Timer(){
 
     useEffect(() => {
         if(selectValue == 0){
-            setSecondsCount(1*4)
+            setSecondsCount(20*60)
             setPause(true)
         }
         if(selectValue == 1){
