@@ -7,6 +7,10 @@ export const Container = styled.div`
     flex-direction: column;
     height: 100vh;
     width: 100%;
+    background: linear-gradient(300deg,#ffb439,#2e92c6,#073596,#39bbff,#ffb439);
+    background-size: 300% 300%;
+    animation: gradient-animation 60s ease infinite;
+
     span {
         font-size: 64px;
         font-family: 'Roboto', sans-serif;
@@ -18,7 +22,25 @@ export const Container = styled.div`
         margin-bottom: 2%;
         background-color: #2b2b2b;
     }
+    & select{
+        width: 10vw;
+    }
+
+
+    @keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
     
+
+
 `
 export const CounterContainer = styled.div`
     background-color: #2b2b2b;
@@ -43,5 +65,8 @@ export const ButtonContainer = styled.div`
     button:hover{
         border: 5px solid #dedede;
         
+    }
+    & .disabledButton{
+        cursor: not-allowed;
     }
 `
